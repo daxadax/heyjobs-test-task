@@ -1,5 +1,6 @@
-# Set testing environment
+# Set testing environment env variables
 ENV['test'] = '1'
+ENV['REMOTE_ADS_API_LOCATION'] = 'https://tinyurl.com/y2rhe2pz'
 
 # require testing components
 require 'minitest/autorun'
@@ -17,7 +18,7 @@ class BaseSpec < Minitest::Spec
 
   def fixture_data(path)
     full_path = expand_path("../fixtures/#{path}.json")
-    JSON.parse(File.read(full_path))
+    File.read(full_path)
   end
 
   def default_campaign_attributes

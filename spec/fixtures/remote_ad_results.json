@@ -1,0 +1,19 @@
+{
+  "ads": [
+    {
+      "reference": "1",
+      "status": "enabled",
+      "description": "Description for campaign 11"
+    },
+    {
+      "reference": "2",
+      "status": "disabled",
+      "description": "Description for campaign 12"
+    },
+    {
+      "reference": "3",
+      "status": "enabled",
+      "description": "Description for campaign 13"
+    }
+  ]
+}
