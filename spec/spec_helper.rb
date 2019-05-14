@@ -4,6 +4,7 @@ ENV['test'] = '1'
 # require testing components
 require 'minitest/autorun'
 require 'minitest/spec'
+require 'webmock/minitest'
 
 # require application components
 Dir.glob('./lib/**/*.rb') { |f| require f }

@@ -5,4 +5,5 @@ gem 'rake'
 
 group :development do
   gem 'minitest'
+  gem 'webmock'
 end
