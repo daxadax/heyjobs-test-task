@@ -1,5 +1,5 @@
 # Set testing environment
-ENV['test'] = 1
+ENV['test'] = '1'
 
 # require testing components
 require 'minitest/autorun'
@@ -7,7 +7,6 @@ require 'minitest/spec'
 
 # require application components
 Dir.glob('./lib/**/*.rb') { |f| require f }
-require './base_application'
 require 'json'
 
 class BaseSpec < Minitest::Spec
@@ -18,5 +17,15 @@ class BaseSpec < Minitest::Spec
   def fixture_data(path)
     full_path = expand_path("../fixtures/#{path}.json")
     JSON.parse(File.read(full_path))
+  end
+
+  def default_campaign_attributes
+    {
+      ad_description: 'trade time for cash',
+      external_reference: '400',
+      job_id: 1234,
+      status: 'active',
+      id: 23
+    }
   end
 end
