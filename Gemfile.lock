@@ -9,6 +9,7 @@ GEM
     mime-types-data (3.2019.0331)
     minitest (5.11.3)
     multi_xml (0.6.0)
+    rake (12.3.2)
 
 PLATFORMS
   ruby
@@ -16,6 +17,7 @@ PLATFORMS
 DEPENDENCIES
   httparty
   minitest
+  rake
 
 BUNDLED WITH
    2.0.1
