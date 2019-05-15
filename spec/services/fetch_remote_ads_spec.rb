@@ -10,8 +10,15 @@ class FetchRemoteAdsSpec < BaseSpec
       stub_request(:get, uri).to_return(status: 404, body: '')
     end
 
-    it 'returns an empty collection' do
-      assert_empty result
+    it 'returns a semantic error message' do
+      exception = assert_raises RuntimeError do
+        result
+      end
+
+      message = 'Can\'t fetch remote ads:'
+      message += " The remote at #{ENV['REMOTE_ADS_API_LOCATION']}"
+      message += " did not return any data."
+      assert_equal message, exception.message
     end
   end
 
