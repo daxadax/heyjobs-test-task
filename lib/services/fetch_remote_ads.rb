@@ -24,6 +24,8 @@ module Services
 
     private
 
+    # NOTE: This mapping makes sense to me as the remote would likely only
+    # handle active or paused ads. It's something I would check with the team.
     def map_status(status)
       return 'active' if status == 'enabled'
       'paused'
