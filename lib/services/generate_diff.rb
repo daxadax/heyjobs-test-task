@@ -13,20 +13,21 @@ module Services
     def initialize(local, remote)
       @local = local
       @remote = remote
+      @remote_reference = remote.delete(:reference)
     end
 
     # NOTE: I chose "diff" rather than "discrepancies" because it's shorter,
     # easier to spell, and is semantically anchored to the 'diff' utility
     def call
-      return if same_description? && same_status?
+      return if remote.keys.all? { |k| no_diff?(k) }
       {
-        remote_reference: remote.delete(:reference),
+        remote_reference: remote_reference,
         diff: build_diff
       }
     end
 
     private
-    attr_reader :local, :diff, :remote
+    attr_reader :local, :remote, :remote_reference
 
     def build_diff
       remote.keys.inject(Hash.new) do |result, key|
