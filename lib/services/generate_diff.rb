@@ -40,13 +40,5 @@ module Services
     def no_diff?(attribute)
       remote[attribute] == local.public_send(attribute)
     end
-
-    def same_description?
-      remote[:ad_description] == local.ad_description
-    end
-
-    def same_status?
-      remote[:status] == local.status
-    end
   end
 end
