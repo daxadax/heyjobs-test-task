@@ -15,7 +15,7 @@ module Services
     def call
       @ads.map do |ad|
         {
-          description: ad['description'],
+          ad_description: ad['description'],
           status: map_status(ad['status']),
           reference: ad['reference']
         }

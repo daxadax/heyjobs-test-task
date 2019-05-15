@@ -25,7 +25,7 @@ class FetchRemoteAdsSpec < BaseSpec
   it 'parses and returns the remote ads' do
     stub_request(:get, uri).to_return(status: 200, body: fixture)
     assert_equal 3, result.size
-    assert_equal 'Description for campaign 11', result[0][:description]
+    assert_equal 'Description for campaign 11', result[0][:ad_description]
     assert_equal '1', result[0][:reference]
     assert_equal 'active', result[0][:status]
   end
