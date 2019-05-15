@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+# TODO: Given more time, it would be nice to consider implementing dependency
+# injection with a mocked version of Services::GenerateDiff as this test
+# currently relies on a working implementation of that class.
+
 class GenerateCampaignDiffSpec < BaseSpec
   let(:uri) { ENV['REMOTE_ADS_API_LOCATION'] }
   let(:fixture) { fixture_data('remote_ad_results') }
