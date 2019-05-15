@@ -2,17 +2,16 @@ require 'csv'
 
 module Entities
   class Campaign
-    CAMPAIGNS_DATA_PATH = './data/campaigns.csv'
     attr_reader :ad_description, :external_reference, :job_id, :status, :id
 
     # NOTE: As the main goal of the task is to implement the business logic
-    # surrounding the campaign diff, I am simply mocking such functionality which
-    # would most likely be in a running application.
+    # surrounding the campaign diff, I am simply mocking functionality which
+    # would exist in a running application (db, scopes)
     # NOTE: I chose to use 'enabled' rather than 'all' since it seems like a waste of
     # resources to run the diff on deleted ads. Furthermore I chose to call this
     # 'enabled' rather than 'active' since it should run the diff on paused campaigns
     def self.enabled
-      CSV.read(CAMPAIGNS_DATA_PATH, headers: true).map do |row|
+      CSV.read(ENV['CAMPAIGNS_DATA_PATH'], headers: true).map do |row|
         new({
           ad_description: row['ad_description'],
           external_reference: row['external_reference'],
