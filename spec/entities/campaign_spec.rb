@@ -23,7 +23,7 @@ class CampaignSpec < BaseSpec
       }
     end
 
-    it 'raises a semantic error' do
+    it 'raises a semantic error message' do
       exception = assert_raises ArgumentError do
         Entities::Campaign.new(attributes)
       end

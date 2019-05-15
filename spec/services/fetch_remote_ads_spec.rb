@@ -10,7 +10,7 @@ class FetchRemoteAdsSpec < BaseSpec
       stub_request(:get, uri).to_return(status: 404, body: '')
     end
 
-    it 'returns a semantic error message' do
+    it 'raises a semantic error message' do
       exception = assert_raises RuntimeError do
         result
       end
