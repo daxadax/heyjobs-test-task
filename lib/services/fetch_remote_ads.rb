@@ -2,8 +2,6 @@ require 'httparty'
 
 module Services
   class FetchRemoteAds
-    API_LOCATION = ENV['REMOTE_ADS_API_LOCATION']
-
     def self.call
       new.call
     end
@@ -32,7 +30,7 @@ module Services
     end
 
     def request_and_parse_ads
-      response = HTTParty.get(API_LOCATION)
+      response = HTTParty.get(api_location)
 
       # NOTE: This error handling could also be implemented so that it simply
       # returns an empty array, and depending on the uses of this service that
@@ -44,8 +42,12 @@ module Services
 
     def no_data_found!
       message = 'Can\'t fetch remote ads:'
-      message += " The remote at #{API_LOCATION} did not return any data."
+      message += " The remote at #{api_location} did not return any data."
       raise RuntimeError.new(message)
+    end
+
+    def api_location
+      ENV['REMOTE_ADS_API_LOCATION']
     end
   end
 end
