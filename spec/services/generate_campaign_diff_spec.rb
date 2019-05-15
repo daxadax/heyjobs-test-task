@@ -63,7 +63,7 @@ class GenerateCampaignDiffSpec < BaseSpec
           local: 'Perscription for campaign 12'
         }
         assert_equal expected_status_diff, result[1][:diff][:status]
-        assert_equal expected_description_diff, result[1][:diff][:description]
+        assert_equal expected_description_diff, result[1][:diff][:ad_description]
       end
     end
   end

@@ -13,7 +13,7 @@ module Services
       enabled_campaigns.map do |campaign|
         remote = detect_matching_remote(campaign)
 
-        CampaignDiff.call(campaign, remote)
+        GenerateDiff.call(campaign, remote)
       end.compact
     end
 
@@ -27,15 +27,14 @@ module Services
       end
     end
 
-    class CampaignDiff
-      def self.call(campaign, remote)
-        new(campaign, remote).call
+    class GenerateDiff
+      def self.call(local, remote)
+        new(local, remote).call
       end
 
-      def initialize(campaign, remote)
-        @campaign = campaign
+      def initialize(local, remote)
+        @local = local
         @remote = remote
-        @diff = Hash.new
       end
 
       # NOTE: I chose "diff" rather than "discrepancies" because it's shorter,
@@ -43,38 +42,39 @@ module Services
       def call
         return if same_description? && same_status?
         {
-          remote_reference: campaign.external_reference,
+          remote_reference: remote.delete(:reference),
           diff: build_diff
         }
       end
 
       private
-      attr_reader :campaign, :diff, :remote
+      attr_reader :local, :diff, :remote
 
       def build_diff
-        unless same_description?
-          diff[:description] = {
-            local: campaign.ad_description,
-            remote: remote[:description]
-          }
-        end
+        remote.keys.inject(Hash.new) do |result, key|
+          if no_diff?(key)
+            result
+          else
+            result[key] = {
+              local: local.public_send(key),
+              remote: remote[key]
+            }
 
-        unless same_status?
-          diff[:status] = {
-            local: campaign.status,
-            remote: remote[:status]
-          }
+            result
+          end
         end
+      end
 
-        diff
+      def no_diff?(attribute)
+        remote[attribute] == local.public_send(attribute)
       end
 
       def same_description?
-        remote[:description] == campaign.ad_description
+        remote[:ad_description] == local.ad_description
       end
 
       def same_status?
-        remote[:status] == campaign.status
+        remote[:status] == local.status
       end
     end
   end
