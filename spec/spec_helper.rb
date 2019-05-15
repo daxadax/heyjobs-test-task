@@ -1,5 +1,6 @@
 # Set testing environment env variables
 ENV['test'] = '1'
+ENV['CAMPAIGNS_DATA_PATH'] = './data/campaigns_diff.csv'
 ENV['REMOTE_ADS_API_LOCATION'] = 'https://tinyurl.com/y2rhe2pz'
 
 # require testing components
