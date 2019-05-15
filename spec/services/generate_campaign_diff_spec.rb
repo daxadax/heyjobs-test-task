@@ -46,6 +46,7 @@ class GenerateCampaignDiffSpec < BaseSpec
       it 'compiles differences and returns the results' do
         assert_equal 2, result.size
 
+        # test first diff
         assert_equal 1, result[0][:diff].size
         expected_diff = {
           remote: 'active',
@@ -53,6 +54,7 @@ class GenerateCampaignDiffSpec < BaseSpec
         }
         assert_equal expected_diff, result[0][:diff][:status]
 
+        # test second diff
         assert_equal 2, result[1][:diff].size
         expected_status_diff = {
           remote: 'paused',
